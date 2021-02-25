@@ -18,8 +18,10 @@ def create_app():
 
     from . import models
 
-    from .views import main_views, auth_views
+    from .views import main_views, auth_views, book_views
     app.register_blueprint(auth_views.bp)
     app.register_blueprint(main_views.bp)
+    app.register_blueprint(book_views.bp)
+
 
     return app

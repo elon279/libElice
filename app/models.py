@@ -34,11 +34,10 @@ class Book(db.Model):
         self.isbn = isbn
         self.stock = stock
 
-class RentaLog(db.Model):
+class RentalLog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'))
     book_id = db.Column(db.Integer, db.ForeignKey('book.id', ondelete='CASCADE'))
-    content = db.Column(db.Text(), nullable=False)
     rental_date = db.Column(db.DateTime(), nullable=False)
     due_date = db.Column(db.DateTime(), nullable=True)
 

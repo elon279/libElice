@@ -16,4 +16,4 @@ def hello_pybo():
 
 @bp.route('/')
 def index():
-    return render_template('main/front.html')
+    return render_template('main/book_main.html')

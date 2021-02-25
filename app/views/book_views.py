@@ -1,8 +1,9 @@
 import csv
 import random
-from flask import Blueprint, request, render_template, session, Response, jsonify
+from flask import Blueprint, request, render_template, session, Response, jsonify,g, redirect, url_for
 from app import db
-from app.models import Book
+from app.models import Book, RentalLog
+from datetime import datetime
 
 bp = Blueprint("book", __name__, url_prefix="/book")
 
@@ -53,4 +54,15 @@ def getAllBook():
 def bookDetail(book_id):
     book = Book.query.get(book_id)
     return render_template('bookDetail/book_detail.html', book=book)
+
+
+@bp.route('/bookRent/<int:id>', methods=('GET', 'POST'))
+def bookRent(id):
+    book = Book.query.get(id)
+    book.stock = int(book.stock) - 1
+    bookRe = RentalLog(user_id= g.user.id, book_id = id ,rental_date =datetime.now(), due_date= datetime.now())
+    db.session.add(bookRe)
+    db.session.commit()
+    return redirect(url_for('book.bookDetail', book_id=book.id))
+
 

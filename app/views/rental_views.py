@@ -17,7 +17,7 @@ def borrowedBooks(user_id):
     for book_id2 in rental_books:
         books.append(Book.query.get(book_id2))
 
-    return render_template('rentReturn/rentLog.html', books=books, rental_log=rental_log)
+    return render_template('borrowReturn/rentLog.html', books=books, rental_log=rental_log)
 
 
 @bp.route('/toReturn/<int:user_id>')
@@ -31,7 +31,7 @@ def booksToReturn(user_id):
     for book_id2 in rental_books:
         books.append(Book.query.get(book_id2))
 
-    return render_template('rentReturn/return.html', books=books, rental_log=rental_log)
+    return render_template('borrowReturn/return.html', books=books, rental_log=rental_log)
 
 
 @bp.route('/<int:user_id>/<int:book_id>', methods=('GET', 'POST'))

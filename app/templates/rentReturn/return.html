@@ -7,8 +7,12 @@
 
 
 
+{% for each in rental_log %}
+                    {% if each.due_date < each.rental_date %}
 
 {% for book in books %}
+            {% if each.book_id == book.id %}
+
     <div>
         <div class="uk-card uk-card-default uk-card-body">
             <a href="{{ book.id }}">{{ book.book_name }}</a>
@@ -17,14 +21,12 @@
             <p>{{ book.stock }}</p>
             <p>{{book.id}} 아이디다</p>
 
-{% for each in rental_log %}
-    {% if each.book_id == book.id %}
+
             <p> {{each.rental_date}}</p>
-            <p> {{each.due_date}}</p>
 
 
-            {% endif %}
-            {% endfor %}
+
+
             <div>
                 <img width="200" src ="{{ url_for('static', filename="{id}.jpg".format(id = book.id)) }}">
             </div>
@@ -33,6 +35,9 @@
                 <input class="uk-button uk-button-secondary uk-width-1-1" type = "submit" value="반납하기">
             </form>
 
+              {% endif %}
+                  {% endfor %}
+        {% endif %}
         </div>
     </div>
 {% endfor %}

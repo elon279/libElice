@@ -26,7 +26,7 @@ def bookRent():
     book = Book.query.filter(Book.id == bookid).first()
     if book.stock > 0:
         book.stock = book.stock - 1
-        rental_log = RentalLog(user_id=g.user.id, book_id=book.id, rental_date=datetime.now(), due_date=datetime.now())
+        rental_log = RentalLog(user_id=g.user.id, book_id=book.id, rental_date=datetime.now(), due_date= datetime(1001,1,1))
         db.session.add(rental_log)
         db.session.commit()
     return redirect(url_for('book.bookDetail', book_id=book.id))

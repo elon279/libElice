@@ -1,6 +1,6 @@
 from flask import Blueprint, request, render_template, session, Response, jsonify, g, redirect, url_for
 from app import db
-from app.models import Book, RentalLog
+from app.models import Book, BorrowLog
 from datetime import datetime
 from app.views.auth_views import login_required
 
@@ -29,4 +29,4 @@ def borrowBook():
         rental_log = RentalLog(user_id=g.user.id, book_id=book.id, rental_date=datetime.now(), due_date= datetime(1001,1,1))
         db.session.add(rental_log)
         db.session.commit()
-    return redirect(url_for('book.book_detail', book_id=book.id))
+    return redirect(url_for('book.getAllBook'))

@@ -34,7 +34,7 @@ class Book(db.Model):
         self.isbn = isbn
         self.stock = stock
 
-class RentalLog(db.Model):
+class BorrowLog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'))
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'))

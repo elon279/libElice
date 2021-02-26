@@ -3,6 +3,11 @@
 {% block content %}
 
     <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match" uk-grid>
+    <div>
+
+
+
+
 {% for book in books %}
     <div>
         <div class="uk-card uk-card-default uk-card-body">
@@ -12,24 +17,26 @@
             <p>{{ book.stock }}</p>
             <p>{{book.id}} 아이디다</p>
 
+{% for each in rental_log %}
+    {% if each.book_id == book.id %}
+            <p> {{each.rental_date}}</p>
+            <p> {{each.due_date}}</p>
 
+
+            {% endif %}
+            {% endfor %}
             <div>
                 <img width="200" src ="{{ url_for('static', filename="{id}.jpg".format(id = book.id)) }}">
             </div>
-        {% if g.user %}
 
-        <form action=" {{url_for('book.bookRent')}}" method="post">
-                <input type="hidden" name="bookid" value="{{ book.id }}"/>
-                <input class="uk-button uk-button-secondary uk-width-1-1" type = "submit" value="대여하기">
-
-        </form>
-{% endif %}
-
-
+            <form action="{{ url_for('rental.returningBook',book_id = book.id , user_id =  g.user.id) }}" >
+                <input class="uk-button uk-button-secondary uk-width-1-1" type = "submit" value="반납하기">
+            </form>
 
         </div>
     </div>
-
-{% endfor%}
+{% endfor %}
 </div>
 {% endblock %}
+
+

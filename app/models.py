@@ -16,10 +16,10 @@ class Book(db.Model):
     author = db.Column(db.String(30))
     publication_date = db.Column(db.String)
     pages = db.Column(db.Integer)
+    isbn = db.Column(db.BIGINT)
     description = db.Column(db.TEXT)
     link = db.Column(db.String(200))
     rating = db.Column(db.Integer)
-    isbn = db.Column(db.BIGINT)
     stock = db.Column(db.Integer)
 
     def __init__(self, book_name, publisher, author, publication_date, pages, description, link, rating, isbn,stock):
@@ -37,7 +37,7 @@ class Book(db.Model):
 class RentalLog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'))
-    book_id = db.Column(db.Integer, db.ForeignKey('book.id', ondelete='CASCADE'))
+    book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
     rental_date = db.Column(db.DateTime(), nullable=False)
     due_date = db.Column(db.DateTime(), nullable=True)
 

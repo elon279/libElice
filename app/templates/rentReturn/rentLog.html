@@ -4,13 +4,26 @@
 
     <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match" uk-grid>
     <div>
+
+
+
+
+{% for book in books %}
+    <div>
         <div class="uk-card uk-card-default uk-card-body">
             <a href="{{ book.id }}">{{ book.book_name }}</a>
             <p>{{ book.rating }}</p>
-            <p>{{ book.description }}</p>
+            <p>{{ book.publication_date }}</p>
             <p>{{ book.stock }}</p>
+            <p>{{book.id}} 아이디다</p>
+
+            <div>
+                <img width="200" src ="{{ url_for('static', filename="{id}.jpg".format(id = book.id)) }}">
+            </div>
         </div>
     </div>
-
+{% endfor %}
 </div>
 {% endblock %}
+
+

@@ -9,13 +9,12 @@
 {% for each in borrow_log %}
         {% if each.return_date < each.borrow_date %}
 
-{% for book in books %}
-            {% if each.book_id == book.id %}
+
 
     <div>
         <div class="uk-card uk-card-default uk-card-body">
-            <a href="{{ url_for('book.bookDetail',book_id = book.id)}} ">{{ book.book_name }}</a>
-            <p>{{ book.rating }}</p>
+            <a href="{{ url_for('book.bookDetail',book_id = each.book.id)}} ">{{ each.book.book_name }}</a>
+            <p>{{ each.book.rating }}</p>
 
             <p>대여일: {{each.rental_date}}</p>
 
@@ -23,15 +22,13 @@
 
 
             <div>
-                <img width="200" src ="{{ url_for('static', filename="{id}.jpg".format(id = book.id)) }}">
+                <img width="200" src ="{{ url_for('static', filename="{id}.jpg".format(id = each.book.id)) }}">
             </div>
 
-            <form action="{{ url_for('borrow.returnBook',book_id = book.id , user_id =  g.user.id) }}" >
+            <form action="{{ url_for('borrow.returnBook',book_id = each.book.id , user_id =  g.user.id) }}" >
                 <input class="uk-button uk-button-secondary uk-width-1-1" type = "submit" value="반납하기">
             </form>
 
-              {% endif %}
-                  {% endfor %}
         {% endif %}
             <hr>
         </div>

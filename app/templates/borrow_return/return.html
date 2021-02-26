@@ -6,22 +6,18 @@
     <div>
 
 
-{% for each in rental_log %}
-        {% if each.due_date < each.rental_date %}
+{% for each in borrow_log %}
+        {% if each.return_date < each.borrow_date %}
 
 {% for book in books %}
             {% if each.book_id == book.id %}
 
     <div>
         <div class="uk-card uk-card-default uk-card-body">
-            <a href="{{ book.id }}">{{ book.book_name }}</a>
+            <a href="{{ url_for('book.bookDetail',book_id = book.id)}} ">{{ book.book_name }}</a>
             <p>{{ book.rating }}</p>
-            <p>{{ book.publication_date }}</p>
-            <p>{{ book.stock }}</p>
-            <p>{{book.id}} 아이디다</p>
 
-
-            <p> {{each.rental_date}}</p>
+            <p>대여일: {{each.rental_date}}</p>
 
 
 
@@ -37,6 +33,7 @@
               {% endif %}
                   {% endfor %}
         {% endif %}
+            <hr>
         </div>
     </div>
 {% endfor %}

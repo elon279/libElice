@@ -37,7 +37,7 @@ def booksToReturn(user_id):
 @bp.route('/<int:user_id>/<int:book_id>', methods=('GET', 'POST'))
 def returnBook(book_id, user_id):
     book = Book.query.filter(Book.id == book_id).first()
-    book.stock = book.stock + 1
+    book.stock += 1
 
     borrow_log = BorrowLog.query.filter(BorrowLog.user_id == user_id, BorrowLog.book_id == book_id).first()
     borrow_log.return_date = datetime.now()

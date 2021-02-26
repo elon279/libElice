@@ -25,7 +25,7 @@ def borrowBook():
     bookid = request.form.get("bookid")
     book = Book.query.filter(Book.id == bookid).first()
     if book.stock > 0:
-        book.stock = book.stock - 1
+        book.stock -= 1
         borrow_log = BorrowLog(user_id=g.user.id, book_id=book.id, borrow_date=datetime.now(), return_date= datetime(1001,1,1))
         db.session.add(borrow_log)
         db.session.commit()

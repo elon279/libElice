@@ -18,7 +18,7 @@
             </div>
         {% if g.user %}
 
-        <form action=" {{url_for('book.bookRent')}}" method="post">
+        <form action=" {{url_for('book.borrowBook')}}" method="post">
                 <input type="hidden" name="bookid" value="{{ book.id }}"/>
                 <input class="uk-button uk-button-secondary uk-width-1-1" type = "submit" value="대여하기">
 

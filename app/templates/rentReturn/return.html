@@ -6,9 +6,8 @@
     <div>
 
 
-
 {% for each in rental_log %}
-                    {% if each.due_date < each.rental_date %}
+        {% if each.due_date < each.rental_date %}
 
 {% for book in books %}
             {% if each.book_id == book.id %}

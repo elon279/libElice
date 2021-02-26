@@ -9,19 +9,28 @@
 
 
 {% for book in books %}
+        {% for each in rental_log %}
+        {% if each.book_id == book.id %}
+
     <div>
         <div class="uk-card uk-card-default uk-card-body">
             <a href="{{ book.id }}">{{ book.book_name }}</a>
             <p>{{ book.rating }}</p>
             <p>{{ book.publication_date }}</p>
             <p>{{ book.stock }}</p>
-            <p>{{book.id}} 아이디다</p>
+            <p>대여 날짜: {{ each.rental_date }}</p>
+            <p>반납날짜:{{ each.due_date }}</p>
+
 
             <div>
                 <img width="200" src ="{{ url_for('static', filename="{id}.jpg".format(id = book.id)) }}">
             </div>
         </div>
     </div>
+
+        {% endif %}
+        {% endfor %}
+
 {% endfor %}
 </div>
 {% endblock %}

@@ -29,7 +29,7 @@ def bookRent(user_id):
     for book_id2 in rental_books:
         books.append(Book.query.get(book_id2))
 
-    return render_template('rentReturn/rentLog.html', books=books)
+    return render_template('rentReturn/rentLog.html', books=books, rental_log= rental_log)
 
 
 

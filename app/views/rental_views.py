@@ -25,13 +25,13 @@ def bookReturn(user_id):
 @bp.route('/return/<int:user_id>/<int:book_id>', methods=('GET', 'POST'))
 def returningBook(book_id, user_id):
     book = Book.query.filter(Book.id == book_id).first()
-    book.stock +=1
+    book.stock = book.stock + 1
 
     rental_log = RentalLog.query.filter(RentalLog.user_id == user_id, RentalLog.book_id == book_id).first()
     rental_log.due_date = datetime.now()
+    db.session.commit()
 
-
-    return redirect(url_for('rental.bookReturn', user_id = user_id))
+    return redirect(url_for('book.bookDetail', book_id = book.id))
 
 
 

@@ -6,6 +6,20 @@ from datetime import datetime
 bp = Blueprint("rental", __name__, url_prefix="/rental")
 
 
+@bp.route('/<int:user_id>')
+def bookRent(user_id):
+    rental_books = []
+    books = []
+    rental_log = RentalLog.query.filter(RentalLog.user_id == user_id).all()
+    for each_log in rental_log:
+        rental_books.append(each_log.book_id)
+
+    for book_id2 in rental_books:
+        books.append(Book.query.get(book_id2))
+
+    return render_template('rentReturn/rentLog.html', books=books, rental_log= rental_log)
+
+
 
 @bp.route('/return/<int:user_id>')
 def bookReturn(user_id):
@@ -32,6 +46,3 @@ def returningBook(book_id, user_id):
     db.session.commit()
 
     return redirect(url_for('book.bookDetail', book_id = book.id))
-
-
-

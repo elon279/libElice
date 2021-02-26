@@ -38,7 +38,8 @@ class BorrowLog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'))
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
-    rental_date = db.Column(db.DateTime(), nullable=False)
-    due_date = db.Column(db.DateTime(), nullable=True)
+    book = db.relationship('Book', backref=db.backref('borrowed_book'))
+    borrow_date = db.Column(db.DateTime(), nullable=False)
+    return_date = db.Column(db.DateTime(), nullable=True)
 
 

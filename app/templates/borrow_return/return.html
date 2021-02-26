@@ -30,7 +30,7 @@
                 <img width="200" src ="{{ url_for('static', filename="{id}.jpg".format(id = book.id)) }}">
             </div>
 
-            <form action="{{ url_for('rental.returnBook',book_id = book.id , user_id =  g.user.id) }}" >
+            <form action="{{ url_for('borrow.returnBook',book_id = book.id , user_id =  g.user.id) }}" >
                 <input class="uk-button uk-button-secondary uk-width-1-1" type = "submit" value="반납하기">
             </form>
 

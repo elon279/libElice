@@ -16,7 +16,7 @@ def getAllBook():
 @bp.route('/<int:book_id>')
 def bookDetail(book_id):
     book = Book.query.get(book_id)
-    return render_template('bookDetail/book_detail.html', book=book)
+    return render_template('book_detail/book_detail.html', book=book)
 
 
 @bp.route('/borrow', methods=('GET', 'POST'))
@@ -29,4 +29,4 @@ def borrowBook():
         rental_log = RentalLog(user_id=g.user.id, book_id=book.id, rental_date=datetime.now(), due_date= datetime(1001,1,1))
         db.session.add(rental_log)
         db.session.commit()
-    return redirect(url_for('book.bookDetail', book_id=book.id))
+    return redirect(url_for('book.book_detail', book_id=book.id))

@@ -3,7 +3,7 @@ from app import db
 from app.models import Book, RentalLog
 from datetime import datetime
 
-bp = Blueprint("rental", __name__, url_prefix="/rental")
+bp = Blueprint("borrow", __name__, url_prefix="/borrow")
 
 
 @bp.route('/<int:user_id>')
@@ -17,7 +17,7 @@ def borrowedBooks(user_id):
     for book_id2 in rental_books:
         books.append(Book.query.get(book_id2))
 
-    return render_template('borrowReturn/rentLog.html', books=books, rental_log=rental_log)
+    return render_template('borrow_return/borrow_log.html', books=books, rental_log=rental_log)
 
 
 @bp.route('/toReturn/<int:user_id>')
@@ -31,7 +31,7 @@ def booksToReturn(user_id):
     for book_id2 in rental_books:
         books.append(Book.query.get(book_id2))
 
-    return render_template('borrowReturn/return.html', books=books, rental_log=rental_log)
+    return render_template('borrow_return/return.html', books=books, rental_log=rental_log)
 
 
 @bp.route('/<int:user_id>/<int:book_id>', methods=('GET', 'POST'))
@@ -43,4 +43,4 @@ def returnBook(book_id, user_id):
     rental_log.due_date = datetime.now()
     db.session.commit()
 
-    return redirect(url_for('book.bookDetail', book_id=book.id))
+    return redirect(url_for('book.book_detail', book_id=book.id))

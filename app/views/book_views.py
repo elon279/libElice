@@ -44,11 +44,13 @@ def rateComment(book_id):
     comment = Comment(content=content, create_date=datetime.now(), book_id=book_id, user_id=g.user.id, rating=rating)
     book.comment_book.append(comment)
 
-    book_comment = Comment.query.get(book_id).all()
+    book_comments = Comment.query.filter(Comment.book_id == book_id).all()
     sum_rating = 0
-    for book_comment_rating in book_comment:
-        sum_rating += book_comment_rating.rating
-        sum_
-    book.rating = round(book.ratun)
+    len_comment = 0
+    for book_comment in book_comments:
+        sum_rating += int(book_comment.rating)
+        len_comment +=1
+    sum_rating = sum_rating + int(rating)
+    book.rating = sum_rating / (len_comment+1)
     db.session.commit()
     return redirect(url_for('book.bookDetail', book_id=book_id ))

@@ -6,11 +6,39 @@
     <div>
         <div class="uk-card uk-card-default uk-card-body">
             <a href="{{ book.id }}">{{ book.book_name }}</a>
+            <img width="200" src ="{{ url_for('static', filename="{id}.jpg".format(id = book.id)) }}">
+
             <p>{{ book.rating }}</p>
             <p>{{ book.description }}</p>
             <p>{{ book.stock }}</p>
         </div>
     </div>
 
+<div>
+    <ul>
+    {% for comment in book.comment_book %}
+        <li>{{ comment.content }} by {{comment.user.username}} </li>
+            <img src ="{{ url_for('static', filename="{id}star.jpg".format(id = comment.rating)) }}">
+        {% endfor %}
 </div>
+
+</div>
+<div>
+
+
+<form action="{{ url_for('book.rateComment', book_id=book.id) }}" method="post">
+    <ul class="rate-area">
+	<input type="radio" id="5-star" name="rating" value="5" /><label for="5-star" title="Amazing">5 stars</label>
+	<input type="radio" id="4-star" name="rating" value="4" /><label for="4-star" title="Good">4 stars</label>
+	<input type="radio" id="3-star" name="rating" value="3" /><label for="3-star" title="Average">3 stars</label>
+	<input type="radio" id="2-star" name="rating" value="2" /><label for="2-star" title="Not Good">2 stars</label>
+	<input type="radio" id="1-star" name="rating" value="1" /><label for="1-star" title="Bad">1 star</label>
+</ul>
+
+
+    <textarea name="content" id="content" rows="15"></textarea>
+    <input type="submit" value="댓글 달기">
+</form>
+
+    </div>
 {% endblock %}

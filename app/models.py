@@ -43,3 +43,12 @@ class BorrowLog(db.Model):
     return_date = db.Column(db.DateTime(), nullable=True)
 
 
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    book_id = db.Column(db.Integer, db.ForeignKey('book.id', ondelete='CASCADE'))
+    book = db.relationship('Book', backref=db.backref('comment_book'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'))
+    user = db.relationship('User', backref=db.backref('comment_user'))
+    content = db.Column(db.Text(), nullable=False)
+    rating = db.Column(db.Integer)
+    create_date = db.Column(db.DateTime(), nullable=False)
